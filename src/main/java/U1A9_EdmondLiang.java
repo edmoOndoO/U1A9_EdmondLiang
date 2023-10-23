@@ -238,19 +238,24 @@ public class U1A9_EdmondLiang extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    // Create a 2D String array named 'mark' with 30 rows (or outer arrays),
+    // Create a 2D String array named 'mark' with 30 rows (or outer arrays)
+    
     // but without specifying the number of columns (inner arrays) for each row.
+    
     // This allows for a jagged array where each row can have a different number of elements.
-    String[][] mark = new String[30][];
-
     private void btnadddataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnadddataActionPerformed
         //Get all the variables for simple usage.
         //Remove any unnecessary spaces at the conclusion by trimming
-        String firstName = txtfirstname.getText().trim(); 
+        String studentname = txtfirstname.getText().trim();
+        
         String lastName = txtlastname.getText().trim();
+        
         String test1Mark = txtfirsttest.getText().trim();
+        
         String test2Mark = txtsecondtest.getText().trim();
+        
         String test3Mark = txtthirdtest.getText().trim();
+        
         String test4Mark = txtfourthtest.getText().trim();
 
         // Check if test marks are in double digit
@@ -260,44 +265,58 @@ public class U1A9_EdmondLiang extends javax.swing.JFrame {
             return;
         }
 
+        
+                
         if(!isDouble(test2Mark))
         {
             JOptionPane.showMessageDialog(null, "Test 2 mark is not a two digit number", "error", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
+        
+                       
         if(!isDouble(test3Mark))
         {
             JOptionPane.showMessageDialog(null, "Test 3 mark is not a two digit number", "error", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
+        
+        
         if(!isDouble(test4Mark))
         {
             JOptionPane.showMessageDialog(null, "Test 4 mark is not a two digit number", "error", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
+        
+                
         // Check if the first name of student starts with a number
-        if(isDigit(firstName.toCharArray()[0]))
+        if(isDigit(studentname.toCharArray()[0]))
         {
             JOptionPane.showMessageDialog(null, "Your first or last name cannot begin with a number.", "error", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
+        
+                     
         if(isDigit(lastName.toCharArray()[0]))
         {
             JOptionPane.showMessageDialog(null, "Your first or last name cannot begin with a number.", "error", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
+        
+                                    
         // Verify that the first name is empty.
-        if(firstName.equals(""))
+        if(studentname.equals(""))
         {
             JOptionPane.showMessageDialog(null, "First Name cannot be empty", "error", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
+        
+        
         // Verify that the last name is empty.
         if(lastName.equals(""))
         {
@@ -305,15 +324,19 @@ public class U1A9_EdmondLiang extends javax.swing.JFrame {
             return;
         }
 
+        
+        
         // Check if the student name already exists.
-        if(studentExists(firstName, lastName))
+        if(studentExists(studentname, lastName))
         {
             JOptionPane.showMessageDialog(null, "student already exists", "error", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        int emptySlots = 0;
-        for (int i = 0; i < mark.length; i++)
+        
+        
+        int emptySlots = 0;  
+        for (int i = 0; i < mark.length; i++)    
         {
             if(mark[i] == null)
             emptySlots++;
@@ -325,12 +348,14 @@ public class U1A9_EdmondLiang extends javax.swing.JFrame {
             return;
         }
 
+        
+                       
         // Add to the first space you find available.
         for(int i = 0; i < mark.length; i++)
         {
             if(mark[i] == null)
             {
-                mark[i] = new String[] { firstName, lastName, test1Mark, test2Mark, test3Mark, test4Mark };
+                mark[i] = new String[] { studentname, lastName, test1Mark, test2Mark, test3Mark, test4Mark };
                 break;
             }
         }
@@ -339,6 +364,9 @@ public class U1A9_EdmondLiang extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnadddataActionPerformed
 
+    String[][] mark = new String[30][];
+    
+        
     private void btnlistdataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlistdataActionPerformed
         // Set initial string
         String toSet = ""; 
@@ -356,9 +384,13 @@ public class U1A9_EdmondLiang extends javax.swing.JFrame {
         txtlistdata.setText(toSet);
     }//GEN-LAST:event_btnlistdataActionPerformed
 
+    
+    
+     
     private void btncalculatestudentaverageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncalculatestudentaverageActionPerformed
         // Declare these for simple access
-        String firstName = txtfirstname.getText();
+        String studentname = txtfirstname.getText();
+        
         String lastName = txtlastname.getText();
 
         // Verify that each item in the class list corresponds to the required names.
@@ -367,21 +399,24 @@ public class U1A9_EdmondLiang extends javax.swing.JFrame {
         for(int i = 0; i < mark.length; i++)
         {
             // Remove any spaces from the string's end after lowercaseizing the words.
-            if(studentExists(firstName, lastName))
+            
+            if(studentExists(studentname, lastName))
             {
-                if(firstName.toLowerCase().trim().equals(mark[i][0].toLowerCase()) && lastName.toLowerCase().trim().equals(mark[i][1].toLowerCase()))
+                if(studentname.toLowerCase().trim().equals(mark[i][0].toLowerCase()) && lastName.toLowerCase().trim().equals(mark[i][1].toLowerCase()))
                 {
                     double avg = (Double.parseDouble(mark[i][2]) + Double.parseDouble(mark[i][3]) + Double.parseDouble(mark[i][4]) + Double.parseDouble(mark[i][5])) / 4;
                     studentExists = true; 
                     // Student is found
 
                     lblindividualaverage.setText("Student Average is: " + avg + "%");
+                    
                     break;
                 }
             }
         }
 
         if(!studentExists)
+            
         {
             JOptionPane.showMessageDialog(null, "student does not exist", "error", JOptionPane.WARNING_MESSAGE);
         }
@@ -389,7 +424,9 @@ public class U1A9_EdmondLiang extends javax.swing.JFrame {
 
     private void btncalculatecourseaverageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncalculatecourseaverageActionPerformed
         double total = 0;
-        int validStudents = 0;
+        
+        int students = 0;
+        
         for(int i = 0; i < mark.length; i++)
         {
             // If the slot is not empty.
@@ -400,8 +437,11 @@ public class U1A9_EdmondLiang extends javax.swing.JFrame {
 
                 // Add all 4 of the test marks.
                 avg += Double.parseDouble(mark[i][2]);
+                
                 avg += Double.parseDouble(mark[i][3]);
+                
                 avg += Double.parseDouble(mark[i][4]);
+                
                 avg += Double.parseDouble(mark[i][5]);
 
                 // Divide the number by four.
@@ -409,40 +449,53 @@ public class U1A9_EdmondLiang extends javax.swing.JFrame {
 
                 // Add it to the class average.
                 total += avg;
-                validStudents++;
+                students++;
             }
         }
 
-        total = total / validStudents;
+        total = total / students;
+        
         double roundedAverage = Math.round(total * 100.0) / 100.0;
 
         lblwholeclassaverage.setText("Course average is: " + roundedAverage + "%");
     }//GEN-LAST:event_btncalculatecourseaverageActionPerformed
 
     private void btnexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexitActionPerformed
+        
         System.exit(0);
+        
         //exit app
+        
     }//GEN-LAST:event_btnexitActionPerformed
     
     public boolean isDouble(String value) {
         // See if the value can be parsed into a double. If it is, double it and output true.
+        
         // If not return false
+        
         try {
+            
             Double.parseDouble(value);
+            
             return true;
+            
         } catch (NumberFormatException e) {
+            
             return false;
+            
         }
     }
     
-    public boolean studentExists(String firstName, String lastName)
+    public boolean studentExists(String studentname, String lastName)
     {
         // Verify if the argument is met for each item that is not null. If it is, the user must be there. If not, the user doesn't exist.
+        
         for(int i = 0; i < mark.length; i++)
+            
         {
             if(mark[i] != null)
             {
-                if (firstName.toLowerCase().trim().equals(mark[i][0].toLowerCase()) && lastName.toLowerCase().trim().equals(mark[i][1].toLowerCase()))
+                if (studentname.toLowerCase().trim().equals(mark[i][0].toLowerCase()) && lastName.toLowerCase().trim().equals(mark[i][1].toLowerCase()))
                 {
                     return true;
                 }
